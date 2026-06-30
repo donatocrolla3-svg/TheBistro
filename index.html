@@ -58,7 +58,7 @@
             letter-spacing: 1px;
         }
 
-        /* Hero Banner Section using your front exterior image */
+        /* Hero Banner Section using 0_IMG_1317_2.avif */
         .hero {
             position: relative;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('0_IMG_1317_2.avif') center/cover no-repeat;
@@ -184,7 +184,7 @@
             color: #888888;
         }
 
-        /* Photo Showcase using your exact local images */
+        /* Photo Showcase using safely encoded web paths */
         .gallery-row {
             display: grid;
             grid-template-columns: 1fr;
@@ -197,6 +197,7 @@
             border: 1px solid var(--border-color);
             border-radius: 6px;
             overflow: hidden;
+            aspect-ratio: 4/3;
         }
 
         .gallery-photo img {
@@ -329,7 +330,7 @@
             </div>
         </div>
 
-        <!-- Gallery Section using unnamed_2.webp and unnamed (1)_2.webp -->
+        <!-- Gallery Section using encoded web names -->
         <h2 class="section-title">Inside & Around the Pub</h2>
         <p class="section-subtitle">A look inside the heart of Gilmerton</p>
         <div class="gallery-row">
@@ -337,7 +338,8 @@
                 <img src="unnamed_2.webp" alt="Inside the Mechanic Arms Bar">
             </div>
             <div class="gallery-photo">
-                <img src="unnamed (1)_2.webp" alt="Aerial view of the Mechanic Arms and Drum Street">
+                <!-- Spaces in links must be written as %20 for browsers to find them -->
+                <img src="unnamed%20(1)_2.webp" alt="Aerial view of the Mechanic Arms and Drum Street">
             </div>
         </div>
 
