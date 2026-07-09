@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Bistro Bar | Gilmerton, Edinburgh</title>
+    <!-- FontAwesome for Social Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- Reset & Base Styles --- */
@@ -105,6 +106,7 @@
             font-family: 'Georgia', serif;
             line-height: 1.2;
             margin-bottom: 20px;
+            color: white;
         }
 
         .hero-text h2 span {
@@ -140,7 +142,6 @@
 
         .feature-card {
             background: rgba(255, 255, 255, 0.85);
-            color: #114042;
             padding: 15px 10px;
             border-radius: 12px;
             text-align: center;
@@ -154,15 +155,17 @@
             object-fit: contain;
         }
 
+        /* FIXED: Added explicit dark text colors for the white feature cards */
         .feature-card h4 {
             font-size: 14px;
             margin-bottom: 6px;
             font-weight: bold;
+            color: #114042; 
         }
 
         .feature-card p {
             font-size: 11px;
-            color: #444;
+            color: #2c3e50; 
             line-height: 1.3;
         }
 
@@ -188,7 +191,6 @@
         .review-card {
             border-radius: 16px;
             padding: 20px;
-            color: white;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -196,8 +198,16 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        .review-card.dark { background-color: #34495e; }
-        .review-card.light { background-color: #a2c4c9; color: #2c3e50; }
+        .review-card.dark { 
+            background-color: #34495e; 
+            color: white;
+        }
+        
+        /* FIXED: Ensured clear dark slate typography for the light teal review card */
+        .review-card.light { 
+            background-color: #a2c4c9; 
+            color: #1a252f; 
+        }
 
         .stars { color: #f1c40f; margin-bottom: 10px; font-size: 14px; }
 
@@ -268,15 +278,13 @@
             flex-direction: column;
         }
 
-        /* Mock Google Map container */
+        /* Map container setup */
         .map-container {
             width: 100%;
             height: 250px;
             position: relative;
-            background: url('https://maps.googleapis.com/maps/api/staticmap?center=Gilmerton,Edinburgh&zoom=14&size=600x300&key=YOUR_API_KEY') no-repeat center center/cover;
         }
         
-        /* If you don't have a Google static map key, we can style an embed iframe safely */
         .map-container iframe {
             width: 100%;
             height: 100%;
@@ -320,6 +328,7 @@
 </head>
 <body>
 
+    <!-- Header Navigation Section -->
     <header>
         <div class="logo-area">
             <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -343,30 +352,37 @@
         </nav>
     </header>
 
+    <!-- Split Page Workspace Blueprint -->
     <div class="main-container">
         
+        <!-- Left Banner Workspace Container -->
         <div class="left-column">
             <div class="hero-text">
                 <h2>Welcome to<br><span>The Bistro Bar</span><br>in Gilmerton.</h2>
                 <a href="tel:01313131313" class="btn-phone">Call 0131 313 1313</a>
             </div>
 
+            <!-- Features Highlights Cards System -->
             <div class="features-grid">
+                <!-- Sunday Lunch -->
                 <div class="feature-card">
                     <img src="https://cdn-icons-png.flaticon.com/512/3081/3081979.png" alt="Sunday Roast">
                     <h4>Sunday Lunches</h4>
                     <p>Delicious roast beef - reviews from "delicious roast beef"</p>
                 </div>
+                <!-- Festive Bookings -->
                 <div class="feature-card">
                     <img src="https://cdn-icons-png.flaticon.com/512/3504/3504143.png" alt="Festive Booking">
                     <h4>Festive Bookings</h4>
                     <p>Lovely Christmas menu from "lovely Christmas menu"</p>
                 </div>
+                <!-- Cocktails -->
                 <div class="feature-card">
                     <img src="https://cdn-icons-png.flaticon.com/512/914/914725.png" alt="Cocktails">
                     <h4>Cocktails</h4>
                     <p>Great cocktails, nome cocktails from "great cocktails"</p>
                 </div>
+                <!-- Event Hire -->
                 <div class="feature-card">
                     <img src="https://cdn-icons-png.flaticon.com/512/2651/2651631.png" alt="Event Hire">
                     <h4>Event Hire</h4>
@@ -375,9 +391,12 @@
             </div>
         </div>
 
+        <!-- Right Informational Feed Column -->
         <div class="right-column">
             
+            <!-- User Reviews Grid Section -->
             <div class="reviews-section">
+                <!-- Review Card 1 (Dark Theme Profile) -->
                 <div class="review-card dark">
                     <div>
                         <div class="stars">★★★★★</div>
@@ -392,6 +411,7 @@
                     </div>
                 </div>
 
+                <!-- Review Card 2 (Soft Blue Theme Profile) -->
                 <div class="review-card light">
                     <div>
                         <div class="stars">★★★★★</div>
@@ -401,12 +421,13 @@
                         <div class="avatar-placeholder">K</div>
                         <div>
                             <strong>Karen Alexander</strong><br>
-                            <span style="color: #7f8c8d;">Google profile</span>
+                            <span style="color: #555;">Google profile</span>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Image Mosaic Gallery Section -->
             <div class="gallery-section">
                 <h3>Gallery Snippets</h3>
                 <div class="gallery-grid">
@@ -415,6 +436,7 @@
                 </div>
             </div>
 
+            <!-- Map Viewport Frame + Dynamic Contact Line Footer -->
             <div class="footer-map-section">
                 <div class="map-container">
                     <iframe src="https://maps.google.com/maps?q=Gilmerton,%20Edinburgh&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe>
