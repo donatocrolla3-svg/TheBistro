@@ -4,341 +4,435 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Bistro Bar | Gilmerton, Edinburgh</title>
-    <!-- Leaflet CSS for Interactive Map -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Base Styling & Cool Palette (Moody Dark Slates, Cool Cyans, and Fresh Teals) */
+        /* --- Reset & Base Styles --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         body {
-            background-color: #0b1116; /* Deep Cool Slate Black */
-            color: #e2e8f0;
-            line-height: 1.6;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
+            background-color: #f7f9fa;
+            color: #333;
+            overflow-x: hidden;
         }
 
-        :root {
-            --cool-cyan: #0ea5e9; /* Sleek, cool teal accent */
-            --light-cyan: #7dd3fc;
-            --dark-panel: #131c24; /* Cool slate container tint */
-            --border-glow: rgba(14, 165, 233, 0.2);
-        }
-
-        /* Header & Navigation */
+        /* --- Navigation Bar --- */
         header {
-            background-color: rgba(11, 17, 22, 0.95);
-            border-bottom: 1px solid #1e293b;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 2rem;
+            padding: 15px 5%;
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .nav-links {
+
+        .logo-text h1 {
+            font-size: 24px;
+            color: #0b6366;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #555;
+            font-weight: 600;
+        }
+
+        nav ul {
             display: flex;
             list-style: none;
-            gap: 2rem;
-        }
-        .nav-links a:hover {
-            color: var(--cool-cyan);
-            transition: 0.3s;
+            gap: 20px;
         }
 
-        /* Hero Section featuring your main party photo */
-        .hero {
-            background: linear-gradient(rgba(11, 17, 22, 0.65), rgba(11, 17, 22, 0.9)), url('https://i.ibb.co/wZpXQWw0/image-d4a1fa.jpg') center/cover;
-            height: 75vh;
+        nav ul li a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a.active, nav ul li a:hover {
+            color: #14a098;
+        }
+
+        /* --- Main Two-Column Layout --- */
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 75px);
+            flex-wrap: wrap;
+        }
+
+        /* --- Left Hero Column --- */
+        .left-column {
+            flex: 1.2;
+            min-width: 500px;
+            background: linear-gradient(135px, rgba(11, 64, 66, 0.95) 0%, rgba(13, 48, 50, 0.85) 100%), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1000') no-repeat center center/cover;
+            color: white;
+            padding: 60px 40px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 1rem;
-            margin-top: 60px;
-        }
-        .hero h1 {
-            font-size: 3.8rem;
-            margin-bottom: 1rem;
-            color: #fff;
-            letter-spacing: 1px;
-        }
-        .hero p {
-            font-size: 1.25rem;
-            max-width: 650px;
-            margin-bottom: 2.5rem;
-            color: #94a3b8;
-        }
-        .cta-btn {
-            background: linear-gradient(135deg, var(--cool-cyan), #0284c7);
-            color: #fff;
-            padding: 1rem 2.5rem;
-            font-weight: bold;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
-            transition: 0.3s ease;
-        }
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
-        }
-
-        /* Layout Grid Sections */
-        section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 2.4rem;
-            margin-bottom: 3.5rem;
-            color: #fff;
-        }
-        .section-title span {
-            color: var(--cool-cyan);
-        }
-
-        /* About & Photo Showcase */
-        .showcase-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .showcase-card {
-            background-color: var(--dark-panel);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #1e293b;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        .showcase-img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-bottom: 3px solid var(--cool-cyan);
-        }
-        .showcase-content {
-            padding: 2rem;
-        }
-        .showcase-content h3 {
-            margin-bottom: 0.8rem;
-            color: #fff;
-            font-size: 1.4rem;
-        }
-
-        /* Reviews Styling */
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        .review-card {
-            background-color: var(--dark-panel);
-            padding: 1.8rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--cool-cyan);
-        }
-        .reviewer-name {
-            font-weight: bold;
-            color: #fff;
-        }
-        .review-stars {
-            color: #38bdf8; /* Cool blue star tints */
-            margin: 0.4rem 0 0.8rem;
-        }
-        .review-text {
-            font-style: italic;
-            color: #cbd5e1;
-            font-size: 0.95rem;
-        }
-
-        /* Map Section Styling */
-        .map-section {
-            text-align: center;
-            background-color: #070b0e;
-            padding: 5rem 2rem;
-            width: 100vw;
-            max-width: 100%;
+            justify-content: space-between;
             position: relative;
         }
-        #map {
-            height: 400px;
-            width: 100%;
-            max-width: 1000px;
-            margin: 2rem auto 0;
-            border-radius: 12px;
-            border: 2px solid #1e293b;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+
+        .hero-text {
+            max-width: 500px;
+            margin-bottom: 40px;
         }
 
-        /* Contact Details Footer */
-        footer {
-            background-color: var(--dark-panel);
+        .hero-text h2 {
+            font-size: 42px;
+            font-family: 'Georgia', serif;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h2 span {
+            color: #25ded3;
+            text-decoration: underline;
+        }
+
+        .btn-phone {
+            display: inline-block;
+            background: #14a098;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(20, 160, 152, 0.3);
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .btn-phone:hover {
+            background: #0f827b;
+            transform: translateY(-2px);
+        }
+
+        /* Features/Highlights Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.85);
+            color: #114042;
+            padding: 15px 10px;
+            border-radius: 12px;
             text-align: center;
-            padding: 4rem 2rem;
-            border-top: 1px solid #1e293b;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .contact-details {
-            margin: 2rem 0;
-            font-size: 1.3rem;
+
+        .feature-card img {
+            width: 45px;
+            height: 45px;
+            margin-bottom: 10px;
+            object-fit: contain;
         }
-        .contact-details p {
-            margin: 0.8rem 0;
-        }
-        .highlight {
-            color: var(--light-cyan);
+
+        .feature-card h4 {
+            font-size: 14px;
+            margin-bottom: 6px;
             font-weight: bold;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.6rem; }
-            .nav-links { display: none; }
+        .feature-card p {
+            font-size: 11px;
+            color: #444;
+            line-height: 1.3;
+        }
+
+        /* --- Right Content Column --- */
+        .right-column {
+            flex: 0.8;
+            min-width: 400px;
+            background: #fdfdfd;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            padding: 40px 30px;
+            background: #ffffff;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .review-card {
+            border-radius: 16px;
+            padding: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .review-card.dark { background-color: #34495e; }
+        .review-card.light { background-color: #a2c4c9; color: #2c3e50; }
+
+        .stars { color: #f1c40f; margin-bottom: 10px; font-size: 14px; }
+
+        .review-text {
+            font-style: italic;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+        }
+
+        .reviewer-info img, .avatar-placeholder {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .avatar-placeholder {
+            background: #8e44ad;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Gallery Snippets */
+        .gallery-section {
+            background: #4a6572;
+            padding: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .gallery-section h3 {
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+            font-size: 22px;
+            letter-spacing: 0.5px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Map & Footer Info Container */
+        .footer-map-section {
+            background: #23313a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Mock Google Map container */
+        .map-container {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            background: url('https://maps.googleapis.com/maps/api/staticmap?center=Gilmerton,Edinburgh&zoom=14&size=600x300&key=YOUR_API_KEY') no-repeat center center/cover;
+        }
+        
+        /* If you don't have a Google static map key, we can style an embed iframe safely */
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .bottom-bar {
+            background: #1a252f;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #b0bec5;
+        }
+
+        .social-icons a {
+            color: #b0bec5;
+            margin-left: 15px;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #14a098;
+        }
+
+        /* --- Responsive Design Breakdown --- */
+        @media (max-width: 992px) {
+            .main-container { flex-direction: column; }
+            .left-column { min-height: auto; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .reviews-section { grid-template-columns: 1fr; }
+            .header { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
-        <div class="nav-container">
-            <div class="logo">THE BISTRO BAR</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#showcase">Our Space</a></li>
-                <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#location">Find Us</a></li>
-            </ul>
+        <div class="logo-area">
+            <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30 20V50M22 20V40M38 20V40M30 50V80" stroke="#0b6366" stroke-width="6" stroke-linecap="round"/>
+                <path d="M55 20L75 45H45L55 20ZM55 45V75M48 75H62" stroke="#14a098" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="logo-text">
+                <h1>The Bistro Bar</h1>
+                <p>Gilmerton, Edinburgh</p>
+            </div>
         </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Our Story</a></li>
+                <li><a href="#">Menu Highlights</a></li>
+                <li><a href="#">Reviews</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Hero Section -->
-    <div class="hero" id="home">
-        <h1>The Bistro Bar</h1>
-        <p>Gilmerton's favorite sleek, cool, and beautifully mood-lit hidden gem. Drop in for amazing French-inspired dishes, custom cocktails, and electric local gatherings.</p>
-        <a href="tel:01313131313" class="cta-btn">Call Us: 0131 313 1313</a>
+    <div class="main-container">
+        
+        <div class="left-column">
+            <div class="hero-text">
+                <h2>Welcome to<br><span>The Bistro Bar</span><br>in Gilmerton.</h2>
+                <a href="tel:01313131313" class="btn-phone">Call 0131 313 1313</a>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3081/3081979.png" alt="Sunday Roast">
+                    <h4>Sunday Lunches</h4>
+                    <p>Delicious roast beef - reviews from "delicious roast beef"</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3504/3504143.png" alt="Festive Booking">
+                    <h4>Festive Bookings</h4>
+                    <p>Lovely Christmas menu from "lovely Christmas menu"</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/914/914725.png" alt="Cocktails">
+                    <h4>Cocktails</h4>
+                    <p>Great cocktails, nome cocktails from "great cocktails"</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2651/2651631.png" alt="Event Hire">
+                    <h4>Event Hire</h4>
+                    <p>Fantastic wee venue, wee venue, from "fantastic wee venue"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column">
+            
+            <div class="reviews-section">
+                <div class="review-card dark">
+                    <div>
+                        <div class="stars">★★★★★</div>
+                        <p class="review-text">"Another great Sunday lunch ... roast beef, but a wear sunday book, highly recommend!"</p>
+                    </div>
+                    <div class="reviewer-info">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100" alt="David Waddell">
+                        <div>
+                            <strong>David Waddell</strong><br>
+                            <span style="color: #bdc3c7;">Google profile</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card light">
+                    <div>
+                        <div class="stars">★★★★★</div>
+                        <p class="review-text">"Hidden gem... friendly staff and wee hendly great cusstants to. thent with a collaiviv walh, hidden prowers and desset."</p>
+                    </div>
+                    <div class="reviewer-info">
+                        <div class="avatar-placeholder">K</div>
+                        <div>
+                            <strong>Karen Alexander</strong><br>
+                            <span style="color: #7f8c8d;">Google profile</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-section">
+                <h3>Gallery Snippets</h3>
+                <div class="gallery-grid">
+                    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=500" alt="Bistro Interior View">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=500" alt="People at Bistro Dinner">
+                </div>
+            </div>
+
+            <div class="footer-map-section">
+                <div class="map-container">
+                    <iframe src="https://maps.google.com/maps?q=Gilmerton,%20Edinburgh&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe>
+                </div>
+                
+                <div class="bottom-bar">
+                    <span>The Bistro Bar, Gilmerton, Edinburgh EH17 8RE | Phone 0131 313 1313</span>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
-    <!-- Live Photo Showcase Area -->
-    <section id="showcase">
-        <h2 class="section-title">Fresh Food, <span>Great Vibes</span></h2>
-        <div class="showcase-grid">
-            <div class="showcase-card">
-                <img src="https://i.ibb.co/hR49m6mS/image-d4f377.jpg" alt="Delicious Bistro Bites" class="showcase-img">
-                <div class="showcase-content">
-                    <h3>Beautifully Crafted Food</h3>
-                    <p>Sample a fresh, exciting menu containing everything from our highly-rated crisp bites to traditional French culinary favorites.</p>
-                </div>
-            </div>
-            <div class="showcase-card">
-                <img src="https://i.ibb.co/3YvjVvTf/image-d4a1de.png" alt="Elegant dining table setup" class="showcase-img">
-                <div class="showcase-content">
-                    <h3>Cozy & Contemporary Dining</h3>
-                    <p>Whether you're visiting for a Sunday roast, a relaxed lunch, or date night cocktails, our sleek modern setting sets the perfect tone.</p>
-                </div>
-            </div>
-            <div class="showcase-card">
-                <img src="https://i.ibb.co/VWVw4L9K/image-d4a1fa.png" alt="Private party functions at the bistro" class="showcase-img">
-                <div class="showcase-content">
-                    <h3>Perfect Venue Hire</h3>
-                    <p>Celebrate your birthdays, engagements, hen nights, or milestones with custom hot buffets, fully equipped setups, and attentive service.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews Grid -->
-    <section id="reviews" style="background-color: #070b0e; width: 100vw; max-width: 100%; position: relative;">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-            <h2 class="section-title">Loved By <span>The Locals</span></h2>
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="reviewer-name">David Waddell</div>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Another great Sunday lunch for fathers day, the roast beef was delicious, I highly recommend this place for any occasion. Thanks to the staff Richard, Angel and the chefs!"</p>
-                </div>
-                <div class="review-card">
-                    <div class="reviewer-name">Chrissy Wilson</div>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"We absolutely love this place and cant wait to get married there, as this is where we got engaged... amazing staff, atmosphere and food 5 stars plus from us!"</p>
-                </div>
-                <div class="review-card">
-                    <div class="reviewer-name">Jan Noon</div>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"We held my daughters hen night there. Fantastic venue. Super buffet. Very helpful staff. Great DJ. Thank you Richard and your lovely staff!"</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Map Section with Red Pin Marker -->
-    <section class="map-section" id="location">
-        <h2 class="section-title">Where to <span>Find Us</span></h2>
-        <p>We are situated right in Gilmerton, Edinburgh. Stop by directly or ring us up!</p>
-        <div id="map"></div>
-    </section>
-
-    <!-- Footer Contact Panel -->
-    <footer>
-        <div class="contact-details">
-            <p>📍 Location: <span class="highlight">Gilmerton, Edinburgh EH17 8RE</span></p>
-            <p>📞 Contact: <span class="highlight">0131 313 1313</span></p>
-        </div>
-        <p style="font-size: 0.9rem; color: #64748b;">No confusing online systems needed—just pop on by or telephone our team directly to save your space.</p>
-        <p style="font-size: 0.8rem; color: #475569; margin-top: 2rem;">&copy; 2026 The Bistro Bar. All images uploaded by owner.</p>
-    </footer>
-
-    <!-- Leaflet JS Map Script with Red Pin Setup -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script>
-        // Exact Coordinates for Gilmerton EH17 8RE area
-        const lat = 55.8978;
-        const lng = -3.1360;
-
-        // Initialize Map
-        const map = L.map('map').setView([lat, lng], 15);
-
-        // Load cool dark-mode styled map layer matching the design
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
-        }).addTo(map);
-
-        // Setup Custom Red Pin Icon
-        const redIcon = L.icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41]
-        });
-
-        // Add Marker with Label
-        L.marker([lat, lng], {icon: redIcon}).addTo(map)
-            .bindPopup('<b style="color:#000;">The Bistro Bar</b><br><span style="color:#333;">Gilmerton, EH17 8RE</span>')
-            .openPopup();
-    </script>
 </body>
 </html>
