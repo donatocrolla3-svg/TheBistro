@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Bistro Bar | Gilmerton, Edinburgh</title>
+    <!-- Leaflet CSS for Interactive Map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <style>
-        /* Base Styling & Cool Palette (Moody Slate, Wood Textures, Cool Neon Blues/Purples) */
+        /* Base Styling & Cool Palette (Moody Dark Slates, Cool Cyans, and Fresh Teals) */
         * {
             margin: 0;
             padding: 0;
@@ -14,7 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #14191f; /* Cool Dark Slate */
+            background-color: #0b1116; /* Deep Cool Slate Black */
             color: #e2e8f0;
             line-height: 1.6;
         }
@@ -24,16 +25,16 @@
         }
 
         :root {
-            --accent-glow: #a855f7; /* Cool purple party lighting tone from your images */
-            --cool-blue: #38bdf8;
-            --dark-panel: #1e2631;
-            --wood-tone: #d97706;
+            --cool-cyan: #0ea5e9; /* Sleek, cool teal accent */
+            --light-cyan: #7dd3fc;
+            --dark-panel: #131c24; /* Cool slate container tint */
+            --border-glow: rgba(14, 165, 233, 0.2);
         }
 
         /* Header & Navigation */
         header {
-            background-color: rgba(20, 25, 31, 0.95);
-            border-bottom: 1px solid #2d3748;
+            background-color: rgba(11, 17, 22, 0.95);
+            border-bottom: 1px solid #1e293b;
             position: fixed;
             width: 100%;
             top: 0;
@@ -53,7 +54,7 @@
             font-weight: 800;
             letter-spacing: 2px;
             color: #fff;
-            text-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+            text-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
         }
         .nav-links {
             display: flex;
@@ -61,13 +62,13 @@
             gap: 2rem;
         }
         .nav-links a:hover {
-            color: var(--cool-blue);
+            color: var(--cool-cyan);
             transition: 0.3s;
         }
 
         /* Hero Section featuring your main party photo */
         .hero {
-            background: linear-gradient(rgba(20, 25, 31, 0.7), rgba(20, 25, 31, 0.9)), url('https://i.ibb.co/wZpXQWw0/image-d4a1fa.jpg') center/cover;
+            background: linear-gradient(rgba(11, 17, 22, 0.65), rgba(11, 17, 22, 0.9)), url('https://i.ibb.co/wZpXQWw0/image-d4a1fa.jpg') center/cover;
             height: 75vh;
             display: flex;
             flex-direction: column;
@@ -84,24 +85,24 @@
             letter-spacing: 1px;
         }
         .hero p {
-            font-size: 1.2.5rem;
+            font-size: 1.25rem;
             max-width: 650px;
             margin-bottom: 2.5rem;
             color: #94a3b8;
         }
         .cta-btn {
-            background: linear-gradient(135deg, var(--accent-glow), var(--cool-blue));
+            background: linear-gradient(135deg, var(--cool-cyan), #0284c7);
             color: #fff;
             padding: 1rem 2.5rem;
             font-weight: bold;
             border-radius: 50px;
             font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
             transition: 0.3s ease;
         }
         .cta-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
         }
 
         /* Layout Grid Sections */
@@ -117,7 +118,7 @@
             color: #fff;
         }
         .section-title span {
-            color: var(--cool-blue);
+            color: var(--cool-cyan);
         }
 
         /* About & Photo Showcase */
@@ -130,14 +131,14 @@
             background-color: var(--dark-panel);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid #2d3748;
+            border: 1px solid #1e293b;
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         .showcase-img {
             width: 100%;
             height: 250px;
             object-fit: cover;
-            border-bottom: 3px solid var(--accent-glow);
+            border-bottom: 3px solid var(--cool-cyan);
         }
         .showcase-content {
             padding: 2rem;
@@ -158,14 +159,14 @@
             background-color: var(--dark-panel);
             padding: 1.8rem;
             border-radius: 10px;
-            border-top: 3px solid var(--cool-blue);
+            border-left: 4px solid var(--cool-cyan);
         }
         .reviewer-name {
             font-weight: bold;
             color: #fff;
         }
         .review-stars {
-            color: #f59e0b;
+            color: #38bdf8; /* Cool blue star tints */
             margin: 0.4rem 0 0.8rem;
         }
         .review-text {
@@ -177,8 +178,11 @@
         /* Map Section Styling */
         .map-section {
             text-align: center;
-            background-color: #0f1319;
+            background-color: #070b0e;
             padding: 5rem 2rem;
+            width: 100vw;
+            max-width: 100%;
+            position: relative;
         }
         #map {
             height: 400px;
@@ -186,8 +190,8 @@
             max-width: 1000px;
             margin: 2rem auto 0;
             border-radius: 12px;
-            border: 2px solid #2d3748;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 2px solid #1e293b;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
         /* Contact Details Footer */
@@ -195,7 +199,7 @@
             background-color: var(--dark-panel);
             text-align: center;
             padding: 4rem 2rem;
-            border-top: 1px solid #2d3748;
+            border-top: 1px solid #1e293b;
         }
         .contact-details {
             margin: 2rem 0;
@@ -205,7 +209,7 @@
             margin: 0.8rem 0;
         }
         .highlight {
-            color: var(--cool-blue);
+            color: var(--light-cyan);
             font-weight: bold;
         }
 
@@ -217,6 +221,7 @@
 </head>
 <body>
 
+    <!-- Header -->
     <header>
         <div class="nav-container">
             <div class="logo">THE BISTRO BAR</div>
@@ -229,12 +234,14 @@
         </div>
     </header>
 
+    <!-- Hero Section -->
     <div class="hero" id="home">
         <h1>The Bistro Bar</h1>
-        <p>Gilmerton's favorite sleek, mood-lit hidden gem. Drop in for amazing French-inspired dishes, beautiful custom cocktails, and electric party atmospheres.</p>
+        <p>Gilmerton's favorite sleek, cool, and beautifully mood-lit hidden gem. Drop in for amazing French-inspired dishes, custom cocktails, and electric local gatherings.</p>
         <a href="tel:01313131313" class="cta-btn">Call Us: 0131 313 1313</a>
     </div>
 
+    <!-- Live Photo Showcase Area -->
     <section id="showcase">
         <h2 class="section-title">Fresh Food, <span>Great Vibes</span></h2>
         <div class="showcase-grid">
@@ -246,23 +253,24 @@
                 </div>
             </div>
             <div class="showcase-card">
-                <img src="https://i.ibb.co/3YvjVvTf/image-d4a1de.png" alt="Elegant dining table close up" class="showcase-img">
+                <img src="https://i.ibb.co/3YvjVvTf/image-d4a1de.png" alt="Elegant dining table setup" class="showcase-img">
                 <div class="showcase-content">
-                    <h3>Cozy & Stylish Dining</h3>
-                    <p>Whether you're visiting for a Sunday roast, a relaxed lunch, or date night cocktails, our contemporary setting sets the perfect tone.</p>
+                    <h3>Cozy & Contemporary Dining</h3>
+                    <p>Whether you're visiting for a Sunday roast, a relaxed lunch, or date night cocktails, our sleek modern setting sets the perfect tone.</p>
                 </div>
             </div>
             <div class="showcase-card">
                 <img src="https://i.ibb.co/VWVw4L9K/image-d4a1fa.png" alt="Private party functions at the bistro" class="showcase-img">
                 <div class="showcase-content">
                     <h3>Perfect Venue Hire</h3>
-                    <p>Celebrate your birthdays, engagements, hen nights, or milestones with custom hot buffets, fully equipped DJ stages, and attentive service.</p>
+                    <p>Celebrate your birthdays, engagements, hen nights, or milestones with custom hot buffets, fully equipped setups, and attentive service.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="reviews" style="background-color: #0f1319; width: 100vw; max-width: 100%; position: relative;">
+    <!-- Reviews Grid -->
+    <section id="reviews" style="background-color: #070b0e; width: 100vw; max-width: 100%; position: relative;">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
             <h2 class="section-title">Loved By <span>The Locals</span></h2>
             <div class="reviews-grid">
@@ -285,31 +293,34 @@
         </div>
     </section>
 
+    <!-- Map Section with Red Pin Marker -->
     <section class="map-section" id="location">
         <h2 class="section-title">Where to <span>Find Us</span></h2>
         <p>We are situated right in Gilmerton, Edinburgh. Stop by directly or ring us up!</p>
         <div id="map"></div>
     </section>
 
+    <!-- Footer Contact Panel -->
     <footer>
         <div class="contact-details">
             <p>📍 Location: <span class="highlight">Gilmerton, Edinburgh EH17 8RE</span></p>
             <p>📞 Contact: <span class="highlight">0131 313 1313</span></p>
         </div>
-        <p style="font-size: 0.9rem; color: #4b5563;">No confusing online systems needed—just pop on by or telephone our team directly to save your space.</p>
-        <p style="font-size: 0.8rem; color: #374151; margin-top: 2rem;">&copy; 2026 The Bistro Bar. All images uploaded by owner.</p>
+        <p style="font-size: 0.9rem; color: #64748b;">No confusing online systems needed—just pop on by or telephone our team directly to save your space.</p>
+        <p style="font-size: 0.8rem; color: #475569; margin-top: 2rem;">&copy; 2026 The Bistro Bar. All images uploaded by owner.</p>
     </footer>
 
+    <!-- Leaflet JS Map Script with Red Pin Setup -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
-        // Approximate Coordinates for Gilmerton EH17 8RE area
-        const lat = 55.9015;
-        const lng = -3.1415;
+        // Exact Coordinates for Gilmerton EH17 8RE area
+        const lat = 55.8978;
+        const lng = -3.1360;
 
         // Initialize Map
         const map = L.map('map').setView([lat, lng], 15);
 
-        // Load cool dark-mode styled map layer
+        // Load cool dark-mode styled map layer matching the design
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
         }).addTo(map);
@@ -326,7 +337,7 @@
 
         // Add Marker with Label
         L.marker([lat, lng], {icon: redIcon}).addTo(map)
-            .bindPopup('<b style="color:#000;">The Bistro Bar</b><br><span style="color:#333;">EH17 8RE</span>')
+            .bindPopup('<b style="color:#000;">The Bistro Bar</b><br><span style="color:#333;">Gilmerton, EH17 8RE</span>')
             .openPopup();
     </script>
 </body>
