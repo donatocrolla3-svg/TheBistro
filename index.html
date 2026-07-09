@@ -3,553 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Mechanic Arms • Bistro & Lounge</title>
-    <!-- Tailwind CSS v3 CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for that premium aesthetic -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,800;1,300&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <!-- Lucide Icons for those clean minimalist UI elements -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>The Bistro Bar | Gilmerton, Edinburgh</title>
     <style>
+        /* Base Reset & Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0B0C0E;
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+            line-height: 1.6;
         }
-        .heading-font {
-            font-family: 'Space Grotesk', sans-serif;
+        a {
+            text-decoration: none;
+            color: inherit;
         }
-        /* Custom scrollbar to keep it looking dark and sleek */
-        ::-webkit-scrollbar {
-            width: 8px;
+
+        /* Color Palette Constants: Cozy Charcoal & Warm Gold */
+        :root {
+            --gold: #d4af37;
+            --dark-bg: #121212;
+            --card-bg: #222222;
         }
-        ::-webkit-scrollbar-track {
-            background: #0B0C0E;
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--dark-bg);
+            border-bottom: 1px solid #333;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #22252A;
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: var(--gold);
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a:hover {
+            color: var(--gold);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80') center/cover;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+            margin-top: 60px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            color: #ccc;
+        }
+        .cta-btn {
+            background-color: var(--gold);
+            color: #111;
+            padding: 0.8rem 2rem;
+            font-weight: bold;
             border-radius: 4px;
+            font-size: 1.1rem;
+            transition: 0.3s ease;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #E93392;
+        .cta-btn:hover {
+            background-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Sections General */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            color: var(--gold);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--gold);
+            margin: 0.5rem auto 0;
+        }
+
+        /* About & Features Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--gold);
+            text-align: center;
+        }
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        /* Reviews Section */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .review-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--gold);
+        }
+        .reviewer-name {
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 0.2rem;
+        }
+        .review-stars {
+            color: #ffcc00;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+        .review-text {
+            font-style: italic;
+            color: #ddd;
+            font-size: 0.95rem;
+        }
+
+        /* Contact & Footer Section */
+        .contact-info {
+            background-color: var(--dark-bg);
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid #333;
+        }
+        .contact-details {
+            margin: 1.5rem 0;
+            font-size: 1.2rem;
+        }
+        .contact-details p {
+            margin: 0.5rem 0;
+        }
+        .highlight {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simplified for mobile preview */
         }
     </style>
 </head>
-<body class="text-[#F3F4F6] antialiased selection:bg-[#E93392]/30 selection:text-[#FF80BF] overflow-x-hidden">
+<body>
 
-    <!-- AMBIENT GLOW SYSTEM -->
-    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-b from-[#E93392]/10 to-transparent rounded-full blur-[120px] pointer-events-none z-0"></div>
-    <div class="absolute top-[40%] left-0 w-[400px] h-[600px] bg-gradient-to-r from-[#9B33E9]/5 to-transparent rounded-full blur-[150px] pointer-events-none z-0"></div>
-
-    <!-- STICKY HEADER -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-[#0B0C0E]/70 border-b border-[#22252A]">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex flex-col cursor-pointer" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
-                <span class="text-xl font-bold tracking-widest uppercase text-white heading-font">THE MECHANIC</span>
-                <span class="text-xs tracking-[0.3em] uppercase text-[#E93392] font-semibold -mt-1">ARMS • BISTRO</span>
-            </div>
-
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wider uppercase text-gray-400">
-                <a href="#experience" class="hover:text-white transition-colors">The Experience</a>
-                <a href="#menu" class="hover:text-white transition-colors">The Menu</a>
-                <a href="#reviews" class="hover:text-white transition-colors">Reviews</a>
-                <a href="#location" class="hover:text-white transition-colors">Find Us</a>
-            </nav>
-
-            <div class="hidden md:flex items-center">
-                <a href="tel:01313131313" class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#E93392] to-[#BC2B74] text-white text-xs font-bold tracking-widest uppercase shadow-lg shadow-[#E93392]/20 hover:shadow-[#E93392]/40 transition-all transform hover:-translate-y-0.5">
-                    <i data-lucide="phone" class="w-3.5 h-3.5"></i> Call to Book
-                </a>
-            </div>
-
-            <!-- Mobile Toggle -->
-            <button class="md:hidden text-white p-2" onclick="toggleMobileMenu()">
-                <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
-            </button>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">THE BISTRO BAR</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
     </header>
 
-    <!-- MOBILE MENU DRAWER -->
-    <div id="mobile-menu" class="hidden fixed inset-x-0 top-20 bg-[#121418] border-b border-[#22252A] z-40 p-6 flex flex-col gap-5 text-center uppercase tracking-widest text-sm font-medium">
-        <a href="#experience" onclick="toggleMobileMenu()" class="text-gray-300 py-2">The Experience</a>
-        <a href="#menu" onclick="toggleMobileMenu()" class="text-gray-300 py-2">The Menu</a>
-        <a href="#reviews" onclick="toggleMobileMenu()" class="text-gray-300 py-2">Reviews</a>
-        <a href="#location" onclick="toggleMobileMenu()" class="text-gray-300 py-2">Find Us</a>
-        <a href="tel:01313131313" class="w-full text-center py-3 rounded-xl bg-gradient-to-r from-[#E93392] to-[#BC2B74] text-white font-bold text-xs tracking-widest">
-            CALL 013 13 13 13 13
-        </a>
+    <!-- Hero Banner (No Booking Buttons) -->
+    <div class="hero" id="home">
+        <h1>The Bistro Bar</h1>
+        <p>A cozy, stylish hidden gem located in the heart of Gilmerton. Drop by for amazing food, classic cocktails, and unmatched local atmosphere.</p>
+        <a href="tel:01313131313" class="cta-btn">Call to Inquire: 0131 313 1313</a>
     </div>
 
-    <!-- HERO SECTION -->
-    <section class="relative pt-12 pb-24 md:py-32 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
-        <div class="lg:col-span-7 flex flex-col justify-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1A1D24] border border-[#2D323B] w-fit mb-6">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#E93392]"></i>
-                <span class="text-[11px] font-bold tracking-widest uppercase text-gray-300">Gilmerton's Hidden Gem</span>
+    <!-- Features / About Section -->
+    <section id="about">
+        <h2 class="section-title">Welcome to Gilmerton's Best</h2>
+        <div class="about-grid">
+            <div class="feature-card">
+                <h3>Fresh Menus</h3>
+                <p>From relaxed breakfasts and delicious casual lunches to beautiful dinners with a distinct French-inspired menu flare.</p>
             </div>
-            
-            <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight uppercase leading-[0.95] text-white mb-6 heading-font">
-                Cozy atmosphere.<br />
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#E93392] via-[#FF69B4] to-[#9B33E9]">
-                    Stylish design.
-                </span>
-            </h1>
-
-            <p class="text-gray-400 text-base sm:text-lg max-w-xl leading-relaxed mb-8 font-light">
-                Experience premium cocktails, dynamic local dining, and an unforgettable cozy neighborhood energy right here in Gilmerton, Edinburgh. Perfect for casual family dinners, weekend gatherings, and pristine premium treats.
-            </p>
-
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                <a href="tel:01313131313" class="px-8 py-4 rounded-xl bg-white text-black font-extrabold text-sm tracking-widest uppercase text-center hover:bg-gray-100 transition-all shadow-xl shadow-white/5 flex items-center justify-center gap-3">
-                    <i data-lucide="phone" class="w-4 h-4"></i> Call 013 13 13 13 13
-                </a>
-                <a href="#menu" class="px-8 py-4 rounded-xl bg-[#16191F] hover:bg-[#1D212A] border border-[#2D323B] text-white font-bold text-sm tracking-widest uppercase transition-all flex items-center justify-center gap-2">
-                    Browse Menu <i data-lucide="chevron-right" class="w-4 h-4 text-[#E93392]"></i>
-                </a>
+            <div class="feature-card">
+                <h3>Famous Sunday Roasts</h3>
+                <p>Highly recommended by locals. Our delicious roast beef is perfect for family gatherings or any special occasion.</p>
             </div>
-
-            <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-[#22252A]">
-                <div>
-                    <div class="text-2xl font-bold text-white tracking-tight heading-font">5.0</div>
-                    <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Google Rating</div>
-                </div>
-                <div>
-                    <div class="text-2xl font-bold text-white tracking-tight heading-font">100%</div>
-                    <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Authentic Eats</div>
-                </div>
-                <div>
-                    <div class="text-2xl font-bold text-white tracking-tight heading-font">Cozy</div>
-                    <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Lounge Vibe</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- IMAGE GRID USING YOUR PROVIDED SCREENSHOTS -->
-        <div class="lg:col-span-5 relative grid grid-cols-2 gap-4">
-          <div class="space-y-4">
-            <div class="rounded-2xl overflow-hidden border border-[#2C3038] shadow-2xl relative group">
-              <img src="image_7.png" alt="Interior lounge dining seating" class="w-full object-cover h-52 sm:h-64 filter brightness-90 hover:brightness-100 transition duration-500 scale-100 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-transparent to-transparent opacity-60"></div>
-            </div>
-            <div class="rounded-2xl overflow-hidden border border-[#2C3038] shadow-2xl relative group">
-              <img src="image_6.png" alt="Gilmerton slider platter burgers" class="w-full object-cover h-40 sm:h-48 filter brightness-90 hover:brightness-100 transition duration-500 scale-100 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-transparent to-transparent opacity-60"></div>
-            </div>
-          </div>
-          <div class="space-y-4 pt-8">
-            <div class="rounded-2xl overflow-hidden border border-[#2C3038] shadow-2xl relative group">
-              <img src="image_5.png" alt="Kids treats dessert page details" class="w-full object-cover h-40 sm:h-48 filter brightness-90 hover:brightness-100 transition duration-500 scale-100 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-transparent to-transparent opacity-60"></div>
-            </div>
-            <div class="rounded-2xl overflow-hidden border border-[#2C3038] shadow-2xl relative group">
-              <img src="image_8.png" alt="Fairy lights blind system" class="w-full object-cover h-52 sm:h-64 filter brightness-90 hover:brightness-100 transition duration-500 scale-100 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-transparent to-transparent opacity-60"></div>
-            </div>
-          </div>
-        </div>
-    </section>
-
-    <!-- AMBIANCE / SERVICE VALUES -->
-    <section id="experience" class="py-20 bg-[#0E1014] border-y border-[#1A1D24]">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-xs font-bold tracking-[0.4em] uppercase text-[#E93392] block mb-3">THE AMBIANCE</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold uppercase text-white tracking-tight heading-font">Cozy Comfort Meets Modern Design</h2>
-                <div class="w-16 h-1 bg-[#E93392] mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-8 rounded-2xl bg-[#14171D] border border-[#222731] hover:border-[#2D3442] transition-all group">
-                    <div class="w-12 h-12 rounded-xl bg-[#E93392]/10 flex items-center justify-center text-[#E93392] mb-6 group-hover:bg-[#E93392] group-hover:text-white transition-all">
-                        <i data-lucide="utensils" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="text-lg font-bold uppercase text-white mb-2 heading-font">Beautiful Food</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">From savory modern sliders to high-end traditional Sunday roasts cooked to crisp perfection.</p>
-                </div>
-
-                <div class="p-8 rounded-2xl bg-[#14171D] border border-[#222731] hover:border-[#2D3442] transition-all group">
-                    <div class="w-12 h-12 rounded-xl bg-[#9B33E9]/10 flex items-center justify-center text-[#9B33E9] mb-6 group-hover:bg-[#9B33E9] group-hover:text-white transition-all">
-                        <i data-lucide="sparkles" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="text-lg font-bold uppercase text-white mb-2 heading-font">Great Cocktails</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">Meticulously layered drinks designed by our passionate staff to kickstart your perfect evening.</p>
-                </div>
-
-                <div class="p-8 rounded-2xl bg-[#14171D] border border-[#222731] hover:border-[#2D3442] transition-all group">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 mb-6 group-hover:bg-amber-500 group-hover:text-black transition-all">
-                        <i data-lucide="clock" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="text-lg font-bold uppercase text-white mb-2 heading-font">Cozy Interiors</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">Sleek slate-gray walls matched with warm mood lighting and curated fairy light blind systems.</p>
-                </div>
+            <div class="feature-card">
+                <h3>Parties & Events</h3>
+                <p>A fantastic venue run by Richard and Willie. Perfect for hiring out for hen nights, engagements, and custom buffets with full DJ setups.</p>
             </div>
         </div>
     </section>
 
-    <!-- TABBED MENU SECTION -->
-    <section id="menu" class="py-24 max-w-5xl mx-auto px-6 relative z-10">
-        <div class="text-center mb-16">
-            <span class="text-xs font-bold tracking-[0.4em] uppercase text-[#E93392] block mb-3">OUR SPECIALTIES</span>
-            <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tight text-white heading-font">EXPLORE THE MENU</h2>
-            <p class="text-gray-500 text-xs tracking-widest uppercase mt-2">Authentic selections from our physical dining catalogs</p>
-        </div>
-
-        <!-- Tab Switches -->
-        <div class="flex justify-center gap-4 mb-12">
-            <button id="tab-treats" onclick="switchMenu('treats')" class="px-6 py-3 rounded-xl font-bold text-xs tracking-widest uppercase transition-all bg-[#E93392] text-white shadow-lg shadow-[#E93392]/20">
-                The Treats
-            </button>
-            <button id="tab-kids" onclick="switchMenu('kids')" class="px-6 py-3 rounded-xl font-bold text-xs tracking-widest uppercase transition-all bg-[#15181E] text-gray-400 hover:text-white border border-[#232730]">
-                The Kids Menu
-            </button>
-        </div>
-
-        <!-- Menu Grid Container -->
-        <div class="bg-[#111317] border border-[#20242B] rounded-3xl p-6 sm:p-10 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#E93392]/5 to-transparent pointer-events-none"></div>
-            
-            <div class="mb-8 pb-4 border-b border-[#20242B] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div>
-                    <span id="menu-title" class="text-2xl font-serif italic text-[#FF80BF] tracking-wide block capitalize">the Treats</span>
-                    <p id="menu-subtitle" class="text-xs text-gray-400 mt-1">Treats come with a choice of warm custard or ice cream</p>
-                </div>
-                <span id="kids-badge" class="hidden px-3 py-1 bg-[#E93392]/10 border border-[#E93392]/30 text-[#FF80BF] text-[11px] font-bold tracking-widest uppercase rounded">
-                    Any 2 Courses for £6.95
-                </span>
+    <!-- Real Customer Reviews Grid -->
+    <section id="reviews">
+        <h2 class="section-title">What Our Regulars Say</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="reviewer-name">David Waddell</div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Another great Sunday lunch for Father's Day, the roast beef was delicious. Highly recommend this place for any occasion. Thanks to Richard, Angel and the chefs!"</p>
             </div>
-
-            <!-- Treats List HTML -->
-            <div id="list-treats" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                <div class="flex flex-col border-b border-[#1A1D24] pb-4 group">
-                    <div class="flex justify-between items-baseline mb-1">
-                        <h4 class="font-bold text-white text-base group-hover:text-[#FF80BF] transition-colors">Caramel apple pie</h4>
-                        <span class="text-sm font-mono text-gray-400 font-semibold">£5.00</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">Delicious apple pie topped with warm caramel sauce.</p>
-                </div>
-                <div class="flex flex-col border-b border-[#1A1D24] pb-4 group">
-                    <div class="flex justify-between items-baseline mb-1">
-                        <h4 class="font-bold text-white text-base group-hover:text-[#FF80BF] transition-colors">Chocolate fudge cake</h4>
-                        <span class="text-sm font-mono text-gray-400 font-semibold">£5.00</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">A rich, decadent slab of warm chocolate fudge cake.</p>
-                </div>
-                <div class="flex flex-col border-b border-[#1A1D24] pb-4 group">
-                    <div class="flex justify-between items-baseline mb-1">
-                        <h4 class="font-bold text-white text-base group-hover:text-[#FF80BF] transition-colors">Pancakes with Nutella</h4>
-                        <span class="text-sm font-mono text-gray-400 font-semibold">£6.00</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">A stack of light, fluffy pancakes with a Nutella surprise.</p>
-                </div>
-                <div class="flex flex-col border-b border-[#1A1D24] pb-4 group">
-                    <div class="flex justify-between items-baseline mb-1">
-                        <h4 class="font-bold text-white text-base group-hover:text-[#FF80BF] transition-colors">Pancakes with biscoff sauce</h4>
-                        <span class="text-sm font-mono text-gray-400 font-semibold">£6.00</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">A stack of light, fluffy pancakes with a biscoff surprise.</p>
-                </div>
-                <div class="flex flex-col border-b border-[#1A1D24] pb-4 group">
-                    <div class="flex justify-between items-baseline mb-1">
-                        <h4 class="font-bold text-white text-base group-hover:text-[#FF80BF] transition-colors">Crolla's ice cream</h4>
-                        <span class="text-sm font-mono text-gray-400 font-semibold">£5.00</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">Ask our brilliant staff for today's premium flavors.</p>
-                </div>
-                <div class="flex flex-col border-b border-[#1A1D24] pb-4 group">
-                    <div class="flex justify-between items-baseline mb-1">
-                        <h4 class="font-bold text-white text-base group-hover:text-[#FF80BF] transition-colors">Sticky toffee pudding</h4>
-                        <span class="text-sm font-mono text-gray-400 font-semibold">£5.00</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">An all-time classic favorite, served piping hot and fresh.</p>
-                </div>
-                <div class="flex flex-col border-b border-[#1A1D24] pb-4 group">
-                    <div class="flex justify-between items-baseline mb-1">
-                        <h4 class="font-bold text-white text-base group-hover:text-[#FF80BF] transition-colors">Cheesecake</h4>
-                        <span class="text-sm font-mono text-gray-400 font-semibold">£5.00</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">Today's house-crafted cheesecake layered with a sweet fruit compote.</p>
-                </div>
+            <div class="review-card">
+                <div class="reviewer-name">Gary</div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"I had a lovely experience at this bistro. The atmosphere is cozy and stylish, making it a perfect place for a relaxed breakfast, lunch, or casual dinner."</p>
             </div>
-
-            <!-- Kids List HTML (Hidden by default) -->
-            <div id="list-kids" class="hidden grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                <div class="flex flex-col border-b border-[#1A1D24] pb-4 group">
-                    <div class="flex justify-between items-baseline mb-1">
-                        <h4 class="font-bold text-white text-base group-hover:text-[#FF80BF] transition-colors">Spaghetti Bolognese</h4>
-                        <span class="text-xs uppercase tracking-wider font-mono text-gray-400">Main</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">Classic rich beef bolognese tossed with tender spaghetti pasta.</p>
-                </div>
-                <div class="flex flex-col border-b border-[#1A1D24] pb-4 group">
-                    <div class="flex justify-between items-baseline mb-1">
-                        <h4 class="font-bold text-white text-base group-hover:text-[#FF80BF] transition-colors">Fish & Chips</h4>
-                        <span class="text-xs uppercase tracking-wider font-mono text-gray-400">Main</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">Crispy golden battered fish served with chunky chips.</p>
-                </div>
-                <div class="flex flex-col border-b border-[#1A1D24] pb-4 group">
-                    <div class="flex justify-between items-baseline mb-1">
-                        <h4 class="font-bold text-white text-base group-hover:text-[#FF80BF] transition-colors">Chicken Nuggets & chips</h4>
-                        <span class="text-xs uppercase tracking-wider font-mono text-gray-400">Main</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">Tender crispy chicken nuggets paired with golden chips.</p>
-                </div>
-                <div class="flex flex-col border-b border-[#1A1D24] pb-4 group">
-                    <div class="flex justify-between items-baseline mb-1">
-                        <h4 class="font-bold text-white text-base group-hover:text-[#FF80BF] transition-colors">Burger & chips</h4>
-                        <span class="text-xs uppercase tracking-wider font-mono text-gray-400">Main</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">Juicy grilled beef patty served in a soft bun with a side of chips.</p>
-                </div>
-                <div class="flex flex-col border-b border-[#1A1D24] pb-4 group">
-                    <div class="flex justify-between items-baseline mb-1">
-                        <h4 class="font-bold text-white text-base group-hover:text-[#FF80BF] transition-colors">Chicken Burger & chips</h4>
-                        <span class="text-xs uppercase tracking-wider font-mono text-gray-400">Main</span>
-                    </div>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed">Crispy or grilled chicken breast patty with a side of golden chips.</p>
-                </div>
+            <div class="review-card">
+                <div class="reviewer-name">Chrissy Wilson</div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"We absolutely love this place and can't wait to get married there, as this is where we got engaged... amazing staff, atmosphere and food. 5 stars plus from us!"</p>
             </div>
-            
-            <div class="mt-12 p-4 rounded-xl bg-[#16191F] border border-[#252A33] flex items-center gap-3 text-xs text-gray-400">
-                <i data-lucide="info" class="w-4 h-4 text-[#E93392] shrink-0"></i>
-                <span>To enquire about dynamic daily specials, seasonal menus, or allergen specifics, call our team directly at <strong>0131 313 1313</strong>.</span>
+            <div class="review-card">
+                <div class="reviewer-name">karen Alexander</div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Hidden gem in Gilmerton. Lovely restaurant, beautiful food, really friendly staff, great cocktails. Highly recommended!"</p>
+            </div>
+            <div class="review-card">
+                <div class="reviewer-name">Jan Noon</div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"We held my daughter's hen night there. Fantastic venue. Super buffet. Very helpful staff. Great DJ. Thank you Richard and your lovely staff."</p>
+            </div>
+            <div class="review-card">
+                <div class="reviewer-name">Roger Spooner</div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Food excellent, service excellent. French menu... Easy to book a table. Very central."</p>
             </div>
         </div>
     </section>
 
-    <!-- LOCAL REVIEWS SECTION -->
-    <section id="reviews" class="py-20 bg-[#0E1014] border-t border-[#1D212A]">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
-                <div>
-                    <span class="text-xs font-bold tracking-[0.4em] uppercase text-[#E93392] block mb-3">REPUTATION</span>
-                    <h2 class="text-3xl md:text-4xl font-extrabold uppercase text-white tracking-tight heading-font">Loved by Gilmerton Locals</h2>
-                </div>
-                <div class="flex items-center gap-1 text-amber-500 bg-[#161920] px-4 py-2 rounded-xl border border-[#252A34]">
-                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                    <span class="text-xs font-bold text-white ml-2">Verified Reviews</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Review 1 -->
-                <div class="bg-[#12151B] border border-[#20252F] p-6 rounded-2xl flex flex-col justify-between hover:-translate-y-1 transition-all duration-300">
-                    <div>
-                        <div class="flex items-center gap-1 text-amber-500 mb-4">
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                        </div>
-                        <p class="text-gray-300 text-sm font-light leading-relaxed mb-6 italic">"Hidden gem in gilmerton lovely restaurant food beautiful staff really friendly great cocktails highly recommended..."</p>
-                    </div>
-                    <div class="pt-4 border-t border-[#1C2028]">
-                        <h4 class="text-xs font-bold text-white uppercase tracking-wider">Karen Alexander</h4>
-                        <div class="flex justify-between items-center mt-1">
-                            <span class="text-[10px] text-gray-500 uppercase font-medium">Local Guide • 47 reviews</span>
-                            <span class="text-[10px] text-gray-600">A year ago</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Review 2 -->
-                <div class="bg-[#12151B] border border-[#20252F] p-6 rounded-2xl flex flex-col justify-between hover:-translate-y-1 transition-all duration-300">
-                    <div>
-                        <div class="flex items-center gap-1 text-amber-500 mb-4">
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                        </div>
-                        <p class="text-gray-300 text-sm font-light leading-relaxed mb-6 italic">"Another great Sunday lunch for fathers day, the roast beef was delicious, I highly recommend this place for any occasion..."</p>
-                    </div>
-                    <div class="pt-4 border-t border-[#1C2028]">
-                        <h4 class="text-xs font-bold text-white uppercase tracking-wider">David Waddell</h4>
-                        <div class="flex justify-between items-center mt-1">
-                            <span class="text-[10px] text-gray-500 uppercase font-medium">Local Guide • 16 reviews</span>
-                            <span class="text-[10px] text-gray-600">2 weeks ago</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Review 3 -->
-                <div class="bg-[#12151B] border border-[#20252F] p-6 rounded-2xl flex flex-col justify-between hover:-translate-y-1 transition-all duration-300">
-                    <div>
-                        <div class="flex items-center gap-1 text-amber-500 mb-4">
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                        </div>
-                        <p class="text-gray-300 text-sm font-light leading-relaxed mb-6 italic">"Just been for a lovely meal with friends. We chose the Christmas menu which was just lovely! 4 empty plates! Cocktails weren't too bad either. Lovely to have..."</p>
-                    </div>
-                    <div class="pt-4 border-t border-[#1C2028]">
-                        <h4 class="text-xs font-bold text-white uppercase tracking-wider">Jane Wilson</h4>
-                        <div class="flex justify-between items-center mt-1">
-                            <span class="text-[10px] text-gray-500 uppercase font-medium">14 reviews in Edinburgh</span>
-                            <span class="text-[10px] text-gray-600">2 years ago</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Review 4 -->
-                <div class="bg-[#12151B] border border-[#20252F] p-6 rounded-2xl flex flex-col justify-between hover:-translate-y-1 transition-all duration-300">
-                    <div>
-                        <div class="flex items-center gap-1 text-amber-500 mb-4">
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                        </div>
-                        <p class="text-gray-300 text-sm font-light leading-relaxed mb-6 italic">"I had a lovely experience at this bistro. The atmosphere is cozy and stylish, making it a perfect place for a relaxed breakfast, lunch, or casual dinner."</p>
-                    </div>
-                    <div class="pt-4 border-t border-[#1C2028]">
-                        <h4 class="text-xs font-bold text-white uppercase tracking-wider">Gary</h4>
-                        <div class="flex justify-between items-center mt-1">
-                            <span class="text-[10px] text-gray-500 uppercase font-medium">1 review</span>
-                            <span class="text-[10px] text-gray-600">6 months ago</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Footer / Pure Contact Info -->
+    <footer class="contact-info" id="contact">
+        <h2 class="section-title" style="margin-bottom: 1.5rem;">Join Us Today</h2>
+        <p>No booking system required—just pop right in or call us directly to check availability or plan a private party hire!</p>
+        <div class="contact-details">
+            <p>📞 Phone: <span class="highlight">0131 313 1313</span></p>
+            <p>📍 Location: <span class="highlight">Gilmerton, Edinburgh EH17 8RE</span></p>
         </div>
-    </section>
-
-    <!-- VISIT / CONTACT SECTION -->
-    <section id="location" class="py-24 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-5 space-y-8">
-            <div>
-                <span class="text-xs font-bold tracking-[0.4em] uppercase text-[#E93392] block mb-3">VISIT US</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold uppercase text-white tracking-tight heading-font">We look forward to welcoming you</h2>
-            </div>
-
-            <div class="space-y-6">
-                <div class="flex gap-4 items-start">
-                    <div class="w-10 h-10 rounded-xl bg-[#E93392]/10 flex items-center justify-center text-[#E93392] shrink-0">
-                        <i data-lucide="map-pin" class="w-4 h-4"></i>
-                    </div>
-                    <div>
-                        <h4 class="text-xs font-bold tracking-widest text-gray-400 uppercase mb-1">Our Location</h4>
-                        <p class="text-white font-medium text-sm">Gilmerton Area, Edinburgh, United Kingdom</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4 items-start">
-                    <div class="w-10 h-10 rounded-xl bg-[#9B33E9]/10 flex items-center justify-center text-[#9B33E9] shrink-0">
-                        <i data-lucide="clock" class="w-4 h-4"></i>
-                    </div>
-                    <div>
-                        <h4 class="text-xs font-bold tracking-widest text-gray-400 uppercase mb-1">Service Hours</h4>
-                        <p class="text-white font-medium text-sm">Open Daily for Breakfast, Lunch, and Casual Dinner</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4 items-start">
-                    <div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 shrink-0">
-                        <i data-lucide="phone" class="w-4 h-4"></i>
-                    </div>
-                    <div>
-                        <h4 class="text-xs font-bold tracking-widest text-gray-400 uppercase mb-1">Telephone Reservations</h4>
-                        <p class="text-white font-bold text-sm">0131 313 1313</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-6 rounded-2xl bg-gradient-to-r from-[#171A21] to-[#111318] border border-[#252A35]">
-                <h4 class="text-xs font-bold tracking-wider uppercase text-white mb-2 flex items-center gap-2">
-                    <i data-lucide="heart" class="w-3.5 h-3.5 text-[#E93392] fill-current"></i> Planning a Special Event?
-                </h4>
-                <p class="text-gray-400 text-xs font-light leading-relaxed">
-                    Whether it's Father's Day lunches, Christmas menu bookings, or group celebrations, give us a call to secure your premium table arrangement.
-                </p>
-            </div>
-        </div>
-
-        <!-- STYLISH BISTRO MAP PREVIEW ARCHETYPE -->
-        <div class="lg:col-span-7 h-96 rounded-3xl overflow-hidden border border-[#232731] relative bg-[#13161C] flex flex-col items-center justify-center text-center p-6">
-            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#2E3440_1px,transparent_1px)] [background-size:16px_16px]"></div>
-            <div class="w-16 h-16 rounded-full bg-[#E93392]/10 flex items-center justify-center text-[#E93392] mb-4 relative z-10 animate-bounce">
-                <i data-lucide="map-pin" class="w-8 h-8"></i>
-            </div>
-            <h3 class="text-lg font-bold uppercase text-white mb-2 relative z-10 heading-font">Mechanic Arms Bistro Area</h3>
-            <p class="text-gray-400 text-xs max-w-sm font-light relative z-10 mb-4">Gilmerton, Edinburgh, Scotland</p>
-            <span class="text-[10px] px-3 py-1 bg-[#1F232B] text-gray-400 font-mono rounded border border-[#2E3442]">MAP PREVIEW MODE</span>
-        </div>
-    </section>
-
-    <!-- MEGA FOOTER -->
-    <footer class="bg-[#08090B] border-t border-[#1C1F24] pt-16 pb-8 text-center">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center">
-            <span class="text-4xl sm:text-6xl lg:text-8xl font-black tracking-tighter uppercase text-white/5 heading-font select-none pointer-events-none block mb-6">
-                THE MECHANIC ARMS
-            </span>
-            <p class="text-gray-600 text-xs tracking-widest uppercase">
-                © 2026 THE MECHANIC ARMS. ALL RIGHTS RESERVED. HANDCRAFTED DESIGN ASSET.
-            </p>
-        </div>
+        <p style="font-size: 0.85rem; color: #666; margin-top: 3rem;">&copy; 2026 The Bistro Bar. Built with care.</p>
     </footer>
 
-    <!-- INTERACTIVE JAVASCRIPT CONTROLS -->
-    <script>
-        // Initialize Lucide SVG Icons
-        lucide.createIcons();
-
-        // Responsive Mobile Navbar Drawer Toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('menu-icon');
-            const isHidden = menu.classList.contains('hidden');
-            
-            if(isHidden) {
-                menu.classList.remove('hidden');
-                icon.setAttribute('data-lucide', 'x');
-            } else {
-                menu.classList.add('hidden');
-                icon.setAttribute('data-lucide', 'menu');
-            }
-            lucide.createIcons();
-        }
-
-        // Elegant Dynamic Tab Switching Logic for the Menu Assets
-        function switchMenu(tab) {
-            const tabTreats = document.getElementById('tab-treats');
-            const tabKids = document.getElementById('tab-kids');
-            const listTreats = document.getElementById('list-treats');
-            const listKids = document.getElementById('list-kids');
-            const menuTitle = document.getElementById('menu-title');
-            const menuSubtitle = document.getElementById('menu-subtitle');
-            const kidsBadge = document.getElementById('kids-badge');
-
-            if (tab === 'treats') {
-                // Active configuration
-                tabTreats.className = "px-6 py-3 rounded-xl font-bold text-xs tracking-widest uppercase transition-all bg-[#E93392] text-white shadow-lg shadow-[#E93392]/20";
-                tabKids.className = "px-6 py-3 rounded-xl font-bold text-xs tracking-widest uppercase transition-all bg-[#15181E] text-gray-400 hover:text-white border border-[#232730]";
-                
-                listTreats.classList.remove('hidden');
-                listKids.classList.add('hidden');
-                
-                menuTitle.innerText = "the Treats";
-                menuSubtitle.innerText = "Treats come with a choice of warm custard or ice cream";
-                kidsBadge.classList.add('hidden');
-            } else {
-                // Active configuration
-                tabKids.className = "px-6 py-3 rounded-xl font-bold text-xs tracking-widest uppercase transition-all bg-[#E93392] text-white shadow-lg shadow-[#E93392]/20";
-                tabTreats.className = "px-6 py-3 rounded-xl font-bold text-xs tracking-widest uppercase transition-all bg-[#15181E] text-gray-400 hover:text-white border border-[#232730]";
-                
-                listKids.classList.remove('hidden');
-                listTreats.classList.add('hidden');
-                
-                menuTitle.innerText = "the Kids Selection";
-                menuSubtitle.innerText = "*Mains come with a choice of chips, mash and beans, or peas*";
-                kidsBadge.classList.remove('hidden');
-            }
-        }
-    </script>
 </body>
 </html>
